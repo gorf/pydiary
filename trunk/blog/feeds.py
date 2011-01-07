@@ -13,8 +13,8 @@ current_site = Site.objects.get_current().name
 
 global_title_template = 'blog/feeds/title.html'
 global_description_template = 'blog/feeds/description.html'
-global_item_copyright = 'Pylogs by Sky'
-global_title = _("Pylogs: Latest Posts")
+global_item_copyright = 'PyDiary by Gorf'
+global_title = _("Emerge Day2day: Latest Posts")
 global_description = _("logging your life...")
 class RssLatestPosts(Feed):
     """
@@ -26,10 +26,10 @@ class RssLatestPosts(Feed):
     title = global_title
     link = "/"
     description = global_description
-    author = "Pylogs RSS generator"
+    author = "PyDiary RSS generator"
     
     def item_author_name(self, item):
-        return 'Sky' #item.author.username
+        return 'Gorf' #item.author.username
     
     def items(self):
         posts = Post.objects.filter(post_type__iexact='post',
@@ -39,7 +39,7 @@ class RssLatestPosts(Feed):
         return posts
     
     def item_author_name(self, item):
-        return 'Sky' #item.author.username
+        return 'Gorf' #item.author.username
     
     def item_link(self, item):
         return item.get_absolute_url() 
@@ -58,10 +58,10 @@ class AtomLatestPosts(Feed):
     title = global_title
     link = "/"
     subtitle = global_description
-    author = "Pylogs ATOM generator"
+    author = "PyDiary ATOM generator"
     
     def item_author_name(self, item):
-        return 'Sky' #item.author.username
+        return 'Gorf' #item.author.username
     
     def items(self):
         posts = Post.objects.filter(post_type__iexact='post',
@@ -71,7 +71,7 @@ class AtomLatestPosts(Feed):
         return posts
     
     def item_author_name(self, item):
-        return 'Sky' #item.author.username
+        return 'Gorf' #item.author.username
     
     def item_link(self, item):
         return item.get_absolute_url() 
