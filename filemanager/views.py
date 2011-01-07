@@ -47,9 +47,9 @@ def index(request,p=None):
         if up_file:            
             filename = up_file.name
             if not check_file_type(filename):
-                return HttpResponse('<script>alert("%s");\
-                                    window.location.href = window.location.href;\
-                                    </script>'%
+                return HttpResponse('<script>alert("%s");'
+                                    'window.location.href = window.location.href;'
+                                    '</script>'%
                                 'Upload this file type is not allowed!')   
             filename = get_safe_filename(path,filename)            
             #fd = open('%s/%s' % (path, filename), 'wb')   
@@ -57,9 +57,9 @@ def index(request,p=None):
             #fd.close()
             upload_file(up_file,'%s/%s' % (path, filename))
             msg = _('Upload successful,filename is %s') % filename
-            return HttpResponse('<script>alert("%s");\
-                                window.location.href = window.location.href;\
-                                </script>'% msg)   
+            return HttpResponse('<script>alert("%s");'
+                               ' window.location.href = window.location.href;'
+                               ' </script>'% msg)   
         if new_dirname:
             #create new dir
             msg = ''
@@ -69,9 +69,9 @@ def index(request,p=None):
                 msg = _('Create directory successful!')
             except:
                 msg = _('Sorry,create directory failed!')
-            return HttpResponse('<script>alert("%s");\
-                                window.location.href = window.location.href;\
-                                </script>'% msg)   
+            return HttpResponse('<script>alert("%s");'
+                                ' window.location.href = window.location.href;'
+                                ' </script>'% msg)   
     list_path(path,dirs,files,file_url_prefix,dir_url_prefix)
     current_loc = p
     for f in files:
