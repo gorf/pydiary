@@ -23,6 +23,28 @@ class PostAdmin(admin.ModelAdmin):
                 '/media/js/tiny_mce/tiny_mce.js',
                 '/media/js/admin_textarea.js',
             )
+    def save_model(safe,request,obj,form,change):
+        #update tag reference_count
+        if change:
+            tag_ids_before_save = set([tag.id for tag in obj.tags.all()])
+            obj.save()
+            form.save_m2m()
+            tag_ids_after_save = set([tag.id for tag in obj.tags.all()])
+            need_update_tag_ids = tag_ids_after_save.symmetric_difference(tag_ids_before_save)
+            for tag_id in need_update_tag_ids:
+                tag = Tags.objects.get(id__exact = tag_id)
+                tag.reference_count = tag.post_set.count()
+                tag.save()
+        else:
+            obj.save()
+            form.save_m2m()
+            if obj.tags:
+                all_tags =  obj.tags.all()
+                for tag in all_tags:
+                    tag.reference_count = tag.post_set.count()
+                    tag.save()
+
+
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name','desc')
