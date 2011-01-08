@@ -13,12 +13,12 @@ def index(request):
         projects = Project.objects.extra(where=['project_tasks = 0 or project_tasks <> project_completed '])
         #projects = Project.objects.filter(project_tasks__exact = project_completed)
     else:#public projects only
-        projects = Project.objects.extra(where=['project_tasks = 0 or project_tasks <> project_completed  and project_type=%s'], params=[PROJECT_TYPE['public']])
+        projects = Project.objects.extra(where=['(project_tasks = 0 or project_tasks <> project_completed)  and project_type=%s'], params=[PROJECT_TYPE['public']])
     #completed projects
     if is_auth:
         com_proj = Project.objects.extra(where=['project_tasks > 0 and project_tasks = project_completed '])
     else:
-        com_proj = Project.objects.extra(where=['project_tasks > 0 and project_tasks = project_completed  and project_type=%s'], params=[PROJECT_TYPE['public']])
+        com_proj = Project.objects.extra(where=['(project_tasks > 0 and project_tasks = project_completed)  and project_type=%s'], params=[PROJECT_TYPE['public']])
         
     return render_to_response('todo/index.html',
                                   {'projects':projects,'completed_projects':com_proj,'is_authenticated':is_auth})
