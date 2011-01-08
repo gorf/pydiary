@@ -135,12 +135,6 @@ class Post(models.Model):
             self.post_name = urlquote(self.post_name)
                   
         super(Post,self).save(force_insert, force_update)
-        #update tags reference_count
-        if self.tags:
-            all_tags =  self.tags.all()
-            for tag in all_tags:
-                tag.reference_count = tag.post_set.count()
-                tag.save()      
     
     def __unicode__(self):
         return self.title
