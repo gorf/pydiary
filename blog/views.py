@@ -29,9 +29,12 @@ def post(request,postname=None,postid=0):
     msg = None
     error = None
     if postname:
-        #get by postname        
-        postname = urlquote(postname)       
-        post = get_object_or_404(Post,post_name__iexact=postname,post_type__iexact='post')        
+        try:
+            post = get_object_or_404(Post,post_name__iexact=postname,post_type__iexact='post')        
+        except Http404,e:
+            #Backwards compatible handle
+            postname = urlquote(postname)
+            post = get_object_or_404(Post,post_name__iexact=postname,post_type__iexact='post')
     elif int(postid)>0:
         #get by postid
         post = get_object_or_404(Post,id__exact=postid,post_type__iexact='post')
@@ -77,8 +80,12 @@ def page(request,pagename):
     msg = None
     error = None
     if pagename:
-        pagename = urlquote(pagename)
-        page = get_object_or_404(Post,post_name__exact=pagename,post_type__iexact='page')      
+        try:
+            page = get_object_or_404(Post,post_name__exact=pagename,post_type__iexact='page')      
+        except Http404,e:
+            #Backwards compatible handle
+            pagename = urlquote(pagename)
+            page = get_object_or_404(Post,post_name__exact=pagename,post_type__iexact='page')
         #post back comment
         if request.method == 'POST':
             form = blog_forms.CommentForm(request.POST)
@@ -151,9 +158,11 @@ def categoryView(request,catname=None,catid=0):
     'Return the posts in the category'
     catid=int(catid)   
     if catname:
-        #get by cat name
-        catname = urlquote(catname)        
-        catInfo = get_object_or_404(Category,enname__iexact=catname)        
+        try:
+            catInfo = get_object_or_404(Category,enname__iexact=catname)
+        except Http404,e:
+            catname = urlquote(catname)
+            catInfo = get_object_or_404(Category,enname__iexact=catname)
     elif catid > 0:       
         #get by id      
         catInfo = get_object_or_404(Category,id__exact=catid)        
@@ -170,8 +179,11 @@ def tags(request,tagname = None):
     '''get the tag related posts.'''
     msg = None
     if tagname:        
-        tagname = urlquote(tagname)        
-        tag = get_object_or_404(Tags,slug__iexact=tagname)
+        try:
+            tag = get_object_or_404(Tags,slug__iexact=tagname)
+        except Http404,e:
+            tagname = urlquote(tagname)
+            tag = get_object_or_404(Tags,slug__iexact=tagname)
         if tag:
             pageid = int(request.GET.get('page', '1'))
             pagedPosts = Paginator(tag.post_set.all().filter(post_type__iexact='post',

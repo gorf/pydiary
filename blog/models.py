@@ -3,7 +3,6 @@ from datetime import datetime
 
 from django.utils.translation import ugettext as _
 from django.db import models
-from django.utils.http import urlquote
 from django.core.urlresolvers import reverse
 import django.utils.html
 
@@ -47,7 +46,6 @@ class Tags(models.Model):
             self.slug = self.name.replace(' ','-')
             self.slug = self.slug.replace(u'　','-')
             self.slug = self.slug.replace('.','')
-            self.slug = urlquote(self.slug)
         super(Tags,self).save(force_insert,force_update)
     
     def __unicode__(self):
@@ -78,7 +76,6 @@ class Category(models.Model):
             self.enname = self.name.replace(' ','-')
             self.enname = self.enname.replace(u'　','-')
             self.enname = self.enname.replace('.','')
-            self.enname = urlquote(self.enname)            
         super(Category,self).save(force_insert, force_update)
         
     def __unicode__(self):
@@ -132,7 +129,6 @@ class Post(models.Model):
             self.post_name = self.title.replace(' ','-')
             self.post_name = self.post_name.replace(u'　','-')
             self.post_name = self.post_name.replace('.','')
-            self.post_name = urlquote(self.post_name)
                   
         super(Post,self).save(force_insert, force_update)
     
