@@ -1,4 +1,4 @@
-{% load i18n themes posttags %}
+{% load i18n themes posttags render%}
 {% theme_extends "base.html" %}
 {% block title %}{{pagetitle}} - {{ block.super }} {% endblock %}
 <!-- Start of RECENT -->
@@ -31,7 +31,7 @@
 
       <div class="postbg">
         <p>
-         {{post.content|safe|truncatewords_html:"20"}}
+         {{post.content|markup:post.markup|safe|truncatewords_html:"20"}}
         </p>
       </div>
     <br/>

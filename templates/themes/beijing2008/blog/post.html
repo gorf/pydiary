@@ -1,4 +1,4 @@
-{% load i18n themes posttags %}
+{% load i18n themes posttags render%}
 {% theme_extends "base.html" %}
 {% block title %}{{post.title}} - {{ block.super }} {% endblock %}
 {% block meta %}<meta content="{{post.title}},Pylogs,基于Python的博客系统" name="keywords"/>
@@ -20,7 +20,7 @@
     {% endif %}
 <div class="date">{% trans "Pubdate" %}: <span class="postdate">{{post.pubdate|date:"Y-m-d H:i:s"}}</span></div>
 <div class="mypost">
-{{post.content|safe}}
+{{post.content|markup:post.markup|safe}}
 </div>
 <div class="tag_tb">
      <h2>相关文章</h2>

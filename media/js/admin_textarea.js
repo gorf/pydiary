@@ -1,5 +1,6 @@
 tinyMCE.init({		
-                mode : "textareas",
+                //mode : "textareas",  // Converts all textarea elements to editors when the page loads.
+ 		        mode:  "none" ,   //     Does not convert any elements. selectivity convert by markup option
 		//elements : "content",
 		theme : "advanced",
                 skin : "o2k7",               
@@ -18,3 +19,23 @@ tinyMCE.init({
 		theme_advanced_statusbar_location : "bottom",
 		theme_advanced_resizing : true
 	});
+ 
+ 
+window.onload = function(){
+    var markup_select = document.getElementById('id_markup');
+    if (markup_select){
+ 		if (markup_select.value == "html"){
+ 		    tinyMCE.execCommand('mceAddControl',false,'id_content')
+ 		}
+ 		addEvent(markup_select,'change',function(){
+                if (markup_select.value != 'html'){
+                    tinyMCE.execCommand('mceRemoveControl',false,'id_content')
+                    //tinyMCE.get("id_content").hide()
+                }else{
+                    tinyMCE.execCommand('mceAddControl',false,'id_content')
+                    //tinyMCE.get("id_content").show()
+                }
+ 		    }
+ 		    )
+ 	    }
+}
