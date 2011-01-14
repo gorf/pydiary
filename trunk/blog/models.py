@@ -31,6 +31,12 @@ POST_COMMENT_STATUS = (
     ('registered',_('Allow Register Comments'))
 )
 
+#markup lanaguage choices
+MARKUP_LANGUAGE_CHOICES = (
+    ("html",_("HTML")),
+    ("markdown",_("MARKDOWN")),
+)
+
 class Tags(models.Model):
     '''Tag entity'''
     name = models.CharField(_('Name'),unique=True,max_length=64)
@@ -99,6 +105,8 @@ class Category(models.Model):
 class Post(models.Model):    
     '''Post Entity'''
     title = models.CharField(_('Title'),max_length=255)
+    #add markup field sql: ALTER TABLE blog_post ADD `markup` VARCHAR(64) NOT NULL DEFAULT 'html';
+    markup = models.CharField(_('Markup'),max_length=64,choices=MARKUP_LANGUAGE_CHOICES,default="html")
     content = models.TextField(_('Content'))
     category = models.ManyToManyField(Category,null=True,blank=True,
                                       verbose_name=_('Category'))

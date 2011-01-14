@@ -1,4 +1,4 @@
-{% load i18n themes posttags %}
+{% load i18n themes posttags render%}
 {% theme_extends "base.html" %}
 {% block title %}{{pagetitle}} - {{ block.super }} {% endblock %}
 
@@ -11,7 +11,7 @@
 |<span class="comments"><a href="{{post.get_absolute_url}}#newcomments">{{post.comment_count}}{% trans "Comments" %} »</a></span> | {{post.hits}} {% trans "Views" %}</div>
 <div class="date">{% trans "Pubdate" %}: <span class="postdate">{{post.pubdate|date:"Y-m-d H:i:s"}}</span></div>
 <div class="mypost">
-{{post.content|safe|truncatewords_html:"20"}}
+{{post.content|markup:post.markup|safe|truncatewords_html:"20"}}
 </div>
 <div class="tag_tb"></div></div>
     {% endfor %}

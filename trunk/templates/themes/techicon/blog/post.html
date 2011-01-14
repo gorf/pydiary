@@ -1,4 +1,4 @@
-{% load i18n themes posttags %}
+{% load i18n themes posttags render%}
 {% theme_extends "base.html" %}
 {% block title %}{{post.title}} - {{ block.super }} {% endblock %}
 {% block meta %}<meta content="{{post.title}},Pylogs,基于Python的博客系统" name="keywords"/>
@@ -26,7 +26,7 @@
     <br><br>
     
       <div class="postbg">
-            {{post.content|safe}}     
+            {{post.content|markup:post.markup|safe}}     
       </div>
     <br>
       <small><a href="{{post.get_absolute_url}}#newcomments">{% trans "Comments" %}({{post.comment_count}})</a><br>

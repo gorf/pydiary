@@ -1,4 +1,4 @@
-{% load i18n themes %}
+{% load i18n themes render%}
 {% theme_extends "base.html" %}
 {% block title %}{{pagetitle}} - {{ block.super }} {% endblock %}
 {% block content %} 
@@ -12,7 +12,7 @@
       </div>
       <div class="body">
         <p>
-         {{post.content|safe|truncatewords_html:"20"}}
+         {{post.content|markup:post.markup|safe|truncatewords_html:"20"}}
         </p>
       </div>
       <div class="byline" style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 1em;">

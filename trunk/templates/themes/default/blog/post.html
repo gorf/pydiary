@@ -1,4 +1,4 @@
-{% load i18n themes %}
+{% load i18n themes render%}
 {% theme_extends "base.html" %}
 {% block title %}{{post.title}} - {{ block.super }} {% endblock %}
 {% block meta %}<meta content="{{post.title}},Pylogs,基于Python的博客系统" name="keywords"/>
@@ -33,7 +33,7 @@
       </div>
       <div class="body">
         <p>
-    {{post.content|safe}}  
+    {{post.content|markup:post.markup|safe}}  
         </p>
         
       </div>

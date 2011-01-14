@@ -12,7 +12,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter =('post_type','category')
     fieldsets = (
     (None, {
-        'fields': ('title', 'post_name','category',
+        'fields': ('title', 'post_name','category','markup',
                    'content','post_status','menu_order','comment_status',)
     }),
     ('Advanced options', {
