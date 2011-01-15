@@ -273,7 +273,7 @@ def post_comment(request,postid):
  	                               comment_author_url=url,
  	                               comment_author_IP=request.META['REMOTE_ADDR'],
  	                               comment_content = content,
- 	                               comment_approved=str(models.COMMENT_APPROVE_STATUS[0][0]),
+ 	                               comment_approved = comment_approved_status,
  	                               comment_agent=request.META['HTTP_USER_AGENT'])
         comment.save()
         new_comment_mail(post.title,comment.comment_content)

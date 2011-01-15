@@ -42,9 +42,9 @@
         </ul>
     </div>
  {% endifnotequal %}    
-    {% ifequal "open" post.comment_status %}
+    {% ifnotequal "close" post.comment_status %}
         {% include "blog/comment_form.html" %}
-    {% endifequal %} 
+    {% endifnotequal %} 
     <!--End of comments-->
 {% endblock %}
 <!--End of content-->

@@ -16,10 +16,8 @@ def convert_time(t):
 def authenticated(func):
 	"""
 	A decorator for functions that will authenticated against
-	the users model and check with the picturefolders owner.
-	Relies on the position of those parameters.
+	the users model
 	"""
-
 	def _wrapper(blogid, username, password, *args, **kw):
 		try:
 			user = User.objects.get(username=username, is_staff=True)
@@ -30,52 +28,67 @@ def authenticated(func):
 	
 	return _wrapper
 
+
+def auth_user(username,password):
+            try:
+                user = User.objects.get(username=username, is_staff=True)
+                if user.check_password(password):
+                        return True
+                else: raise ValueError("Authentication Failure")
+            except User.DoesNotExist: raise ValueError("Authentication Failure")
+ 	
+
 def newPost(user, blogid, struct, publish):
-	"""
-	Add a new posting. Actually this is a faked posting, as the posting
-	is just used to decide what folder to move the referenced image to.
-	"""
-	folder = struct.get('categories',[''])
-	categories = Category.objects.filter(name__in=struct.get('categories',['']))
-#	if struct.has_key('dateCreated'):
-#		mtime = time.mktime(time.strptime(struct['dateCreated'], '%Y%m%dT%H:%M:%S'))
-	status = POST_STATUS[1][0]
-	if publish:
-		status = POST_STATUS[0][0]
-	post = Post(title=struct['title'], content=struct['description'], 
-		pubdate=convert_time(struct['dateCreated']), post_status=status
-		)
-	post.save()
-	for c in categories:
-		post.category.add(c)
-	return post.id
+    """
+    Add a new posting. Actually this is a faked posting, as the posting
+    is just used to decide what folder to move the referenced image to.
+    """
+    folder = struct.get('categories',[''])
+    categories = Category.objects.filter(name__in=struct.get('categories',['']))
+
+    status = POST_STATUS[1][0]
+    if publish:
+        status = POST_STATUS[0][0]
+    if struct.has_key('dateCreated'):
+        pubdate=convert_time(struct['dateCreated'])
+    else:
+        pubdate = datetime.datetime.now()
+    post = Post(title=struct['title'], content=struct['description'], pubdate=pubdate, post_status=status)
+    post.save()
+    for c in categories:
+        post.category.add(c)
+    return post.id
 
 newPost = authenticated(newPost)
 
 def editPost(user, blogid, struct, publish):
-	"""
-	Add a new posting. Actually this is a faked posting, as the posting
-	is just used to decide what folder to move the referenced image to.
-	"""
-	folder = struct.get('categories',[''])
-	categories = Category.objects.filter(name__in=struct.get('categories',['']))
-	post = Post.objects.get(pk=int(blogid))
+    """
+    Add a new posting. Actually this is a faked posting, as the posting
+    is just used to decide what folder to move the referenced image to.
+    """
+    folder = struct.get('categories',[''])
+    categories = Category.objects.filter(name__in=struct.get('categories',['']))
+    post = Post.objects.get(pk=int(blogid))
 	
-	status = POST_STATUS[1][0]
-	if publish:
-		status = POST_STATUS[0][0]
+    status = POST_STATUS[1][0]
+    if publish:
+        status = POST_STATUS[0][0]
 #	if struct.has_key('dateCreated'):
 #		mtime = time.mktime(time.strptime(struct['dateCreated'], '%Y%m%dT%H:%M:%S'))
-	post.title = struct['title']
-	post.content = struct['description']
-	post.pubdate = convert_time(struct['dateCreated'])
-	post.post_status = status
+    if struct.has_key('dateCreated'):
+ 			post.pubdate=convert_time(struct['dateCreated'])
+    else:
+ 			post.pubdate = datetime.datetime.now()
+    post.title = struct['title']
+    post.content = struct['description']
+    #post.pubdate = convert_time(struct['dateCreated'])
+    post.post_status = status
 	
-	post.save()
-	post.category.clear()
-	for c in categories:
-		post.category.add(c)
-	return post.id
+    post.save()
+    post.category.clear()
+    for c in categories:
+        post.category.add(c)
+    return post.id
 
 editPost = authenticated(editPost)
 
@@ -102,7 +115,6 @@ def getPost(user, postid):
 		post = Post.objects.get(pk=postid)
 	except ObjectDoesNotExist:
 		raise ValueError("Post is not existed")
-	
 	return make_post(post)
 		
 getPost = authenticated(getPost)
@@ -122,7 +134,7 @@ def make_post(post):
 			 'description':post.content, 
 			 'postid':str(post.id),
 			 'categories':[c.name for c in post.category.all()],
-			 'dateCreated':xmlrpclib.DateTime(post.pubdate.isoformat()) }
+			 'dateCreated':xmlrpclib.DateTime(post.pubdate.utcnow()) }
 	return d
 	
 def getRecentPosts(user, blogid, number):	
@@ -135,22 +147,38 @@ def getRecentPosts(user, blogid, number):
 	return s
 getRecentPosts = authenticated(getRecentPosts)
 
+def deletePost(appkey,postid,username,password,publish):
+        if auth_user(username,password):
+            post = Post.objects.get(pk=int(postid))
+            if post:
+                    post.delete()
+                    return True
+            else:
+                    raise ValueError('Specified post not found!')
+ 	
+        else:
+                raise ValueError('Authentication Failure')
+
 def newMediaObject(user, blogid, struct):
 	"""
 	Store a new fileupload in a hidden upload folder so that
 	later posts can reference the file and move it to the
 	destination directory.
 	"""	
+
 	datestr = datetime.datetime.today().strftime('%Y%m')
-	upath = os.path.join(MEDIA_ROOT, 'upload',datestr)	
-	url = os.path.join(MEDIA_URL,'upload',datestr)		
+	upath = os.path.join(MEDIA_ROOT, 'upload','files',datestr)	
+	url = os.path.join(MEDIA_URL,'upload','files',datestr)		
 	(base, ext) = struct['type'].split('/')
 	if base != 'image': raise ValueError('%s not supported' % struct['type'])
 	(base, ext) = os.path.splitext(struct['name'])
 	imagefile = os.path.realpath(os.path.join(upath, base+ext))
 	if not imagefile.startswith(upath): raise ValueError('to %s disallowed' % upath)
 	p = os.path.dirname(imagefile)
-	if not os.path.exists(p): os.mkdir(p)
+
+	if not os.path.exists(p):
+            os.makedirs(p)
+
 	f = open(imagefile, 'wb+')
 	f.write(struct['bits'].data)	
 	f.close()	

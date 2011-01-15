@@ -4,7 +4,7 @@
 <head>
 <meta name="google-site-verification" content="LB5caBT5CQ_8WTQy7RTexECkSogUtdRrV0NdbVcYHXo" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>{% block title %}日复一日emerge - 这里记录着我和Gentoo的日日夜夜...{% endblock %}</title>
+<title>{% block title %}{%site_name%}-{%site_subtitle%} {% endblock %}</title>
 {%block meta %}
 <meta content="linux,gentoo,blog,博客,todo,python,Django,基于Python的博客系统" name="keywords"/>
 <meta name="description" content="Pylogs是一个由Sky独立开发的个人站点，程序基于python+django.主要目的是实现一个简单的blog系统，当然不仅仅是blgo,以后将加入更多新的功能。总之，一切由简单开始！　　
@@ -71,7 +71,7 @@ Simple is beautiful..."/>{%endblock%}
 
 </div>
 
-<div id="header"><h1><a href='#'>日复一日emerge</a></h1><h2>这里记录着我和Gentoo的日日夜夜...</h2></div>
+<div id="header"><h1><a href='#'>{%site_name%}</a></h1><h2>{%site_subtitle%}</h2></div>
 {% block recent %}{% endblock %}
 <div id="main">
     <div class="entry">
