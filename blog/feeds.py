@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #coding=utf-8
+import urlparse
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.feedgenerator import Atom1Feed
@@ -9,13 +10,16 @@ from django.contrib.syndication.feeds import Feed
 from models import Post,Category
 from utils import html
 from blog import models
+
+from django.conf import settings
+
 current_site = Site.objects.get_current().name
 
 global_title_template = 'blog/feeds/title.html'
 global_description_template = 'blog/feeds/description.html'
-global_item_copyright = 'PyDiary by Gorf'
-global_title = _("Emerge Day2day: Latest Posts")
-global_description = _("logging your life...")
+global_item_copyright = getattr(settings,"FEED_COPYRIGHT",_('PyDiary by Gorf'))
+global_title = getattr(settings,"FEED_GLOBAL_TITLE",_("Emerge Day2day: Latest Posts"))
+global_description = getattr(settings,"FEED_GLOBAL_DESCRIPTION",_("logging your life..."))
 class RssLatestPosts(Feed):
     """
     RSS Feed of the most recently published posts.    
@@ -28,8 +32,6 @@ class RssLatestPosts(Feed):
     description = global_description
     author = "PyDiary RSS generator"
     
-    def item_author_name(self, item):
-        return 'Gorf' #item.author.username
     
     def items(self):
         posts = Post.objects.filter(post_type__iexact='post',
@@ -39,11 +41,12 @@ class RssLatestPosts(Feed):
         return posts
     
     def item_author_name(self, item):
-        return 'Gorf' #item.author.username
+        return getattr(settings,"FEED_POST_AUTHOR_NAME",'Gorf') #item.author.username
     
     def item_link(self, item):
-        return item.get_absolute_url() 
-    
+        blog_url_prefix = getattr(settings,"FEED_BLOG_URL_PREFIX","/")
+        return urlparse.urljoin(blog_url_prefix, item.get_absolute_url()) 
+
     def item_pubdate(self, item):
         return item.pubdate
     
@@ -60,9 +63,6 @@ class AtomLatestPosts(Feed):
     subtitle = global_description
     author = "PyDiary ATOM generator"
     
-    def item_author_name(self, item):
-        return 'Gorf' #item.author.username
-    
     def items(self):
         posts = Post.objects.filter(post_type__iexact='post',
                                     post_status__iexact = models.POST_STATUS[0][0])[:15]
@@ -71,10 +71,11 @@ class AtomLatestPosts(Feed):
         return posts
     
     def item_author_name(self, item):
-        return 'Gorf' #item.author.username
+        return getattr(settings,"FEED_POST_AUTHOR_NAME",'Gorf') #item.author.username
     
     def item_link(self, item):
-        return item.get_absolute_url() 
+        blog_url_prefix = getattr(settings,"FEED_BLOG_URL_PREFIX","/")
+        return urlparse.urljoin(blog_url_prefix, item.get_absolute_url()) 
     
     def item_pubdate(self, item):
         return item.pubdate
