@@ -2,6 +2,11 @@ from django.contrib import admin
 import os
 from django.conf import settings
 from models import Category, Comments, Links,Post, Tags
+ 
+MEDIA_URL = settings.MEDIA_URL
+if not MEDIA_URL.endswith("/"): MEDIA_URL +=  "/"
+ 
+ 
 class TagsAdmin(admin.ModelAdmin):
     list_display = ('name','slug','reference_count')
     search_fields = ['name']
@@ -22,8 +27,8 @@ class PostAdmin(admin.ModelAdmin):
     )
     class Media:
         js = (
-                os.path.join(settings.MEDIA_URL,'js/tiny_mce/tiny_mce.js'),
-                os.path.join(settings.MEDIA_URL,'js/admin_textarea.js'),
+                os.path.join(MEDIA_URL,'js/tiny_mce/tiny_mce.js'),
+                os.path.join(MEDIA_URL,'js/admin_textarea.js'),
             )
     def save_model(safe,request,obj,form,change):
         #update tag reference_count
