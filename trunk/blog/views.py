@@ -9,6 +9,7 @@ from django.http import HttpResponse,HttpResponseRedirect,Http404
 from django.shortcuts import get_object_or_404,get_list_or_404,render_to_response
 from django.core.paginator import Paginator, InvalidPage
 from django.core.urlresolvers import reverse
+from django.utils import simplejson
 
 from utils import html
 from utils.email import new_comment_mail
@@ -106,7 +107,7 @@ def page(request,pagename):
         if request.method == 'POST':
             form = blog_forms.CommentForm(request.POST)
             if request.POST.get('comment_vcode','').lower() != request.session.get('vcode'):
-                error = 'The confirmation code you entered was incorrect!'
+                error = _('The confirmation code you entered was incorrect!')
             else:                
                 if form.is_valid():
                     #set a random string to session, refresh post failed 
@@ -242,3 +243,39 @@ def renderPaggedPosts(pageid,pageTitle,pagedPosts,showRecent = False,request=Non
     return render_to_response(LIST_TEMPLATE,
                               data,
                               context_instance=context) 
+
+def json(data):
+    data = simplejson.dumps(data)
+    return HttpResponse(data,mimetype='application/x-javascript')
+ 
+def post_comment(request,postid):
+    vcode = request.GET.get('vcode')
+    if vcode.lower() != request.session.get('vcode'):
+        error = _('The confirmation code you entered was incorrect!')
+        return json({'success':False,'error':error})
+    else:
+        #set a random string to session, refresh post failed
+        request.session['vcode'] = random.random();
+        author = request.GET.get('author')
+        email = request.GET.get('email')
+        content = request.GET.get('content')
+ 	
+        url = request.GET.get('url','')
+ 	
+        post = Post.objects.get(id__exact=int(postid))
+        if  post.comment_status ==  models.POST_COMMENT_STATUS[3][0]:  # comment no need approve
+            comment_approved_status = models.COMMENT_APPROVE_STATUS[1][0]   # comment approved
+        else:
+            comment_approved_status = models.COMMENT_APPROVE_STATUS[0][0]   # comment unapproved
+        comment = Comments(post = post,
+ 	                               comment_author= author,
+ 	                               comment_author_email=email,
+ 	                               comment_author_url=url,
+ 	                               comment_author_IP=request.META['REMOTE_ADDR'],
+ 	                               comment_content = content,
+ 	                               comment_approved=str(models.COMMENT_APPROVE_STATUS[0][0]),
+ 	                               comment_agent=request.META['HTTP_USER_AGENT'])
+        comment.save()
+        new_comment_mail(post.title,comment.comment_content)
+        return json({'success':_('Comment post successful!')})
+        #send mail to admin
