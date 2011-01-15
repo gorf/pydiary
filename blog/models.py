@@ -28,7 +28,8 @@ COMMENT_APPROVE_STATUS = (
 POST_COMMENT_STATUS = (
     ('open',_('Allow Comments')),
     ('closed',_('Disallow Comments')),
-    ('registered',_('Allow Register Comments'))
+    ('registered',_('Allow Register Comments')),
+    ('free',_('No Need Approve'))
 )
 
 #markup lanaguage choices
