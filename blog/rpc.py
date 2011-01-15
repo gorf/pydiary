@@ -20,7 +20,7 @@ def call(request):
 		p, u = xmlrpclib.getparser()
 		p.feed(request.raw_post_data)
 		p.close()
-
+		#print request.raw_post_data
 		args = u.close()
 		method = u.getmethodname()		
 		func = getattr(__import__('blog'), 'metaweblogapi')
@@ -39,5 +39,5 @@ def call(request):
 			
 		return HttpResponse(xml, mimetype='text/xml; charset=utf-8')
 	else:
-		raise Http404
+            return HttpResponse("Pylogs xmlrpc service!<br/> more information: use Google search \"MetaWeblog API\";)")
 

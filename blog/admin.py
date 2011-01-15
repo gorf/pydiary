@@ -1,7 +1,7 @@
 from django.contrib import admin
 import os
 from django.conf import settings
-from models import Category, Comments, Links,Post, Tags
+from models import Category, Comments, Links,Post, Tags, Setting
  
 MEDIA_URL = settings.MEDIA_URL
 if not MEDIA_URL.endswith("/"): MEDIA_URL +=  "/"
@@ -74,8 +74,13 @@ class LinksAdmin(admin.ModelAdmin):
             'fields': ('link_desc', 'link_image')
         }),
     )
+ 
+class SettingAdmin(admin.ModelAdmin):
+    list_display = ('setting_name','setting_value','setting_desc')
+ 
 admin.site.register(Tags,TagsAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Comments,CommentsAdmin)
 admin.site.register(Links,LinksAdmin)
 admin.site.register(Post,PostAdmin)   
+admin.site.register(Setting,SettingAdmin)

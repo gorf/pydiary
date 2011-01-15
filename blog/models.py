@@ -265,3 +265,17 @@ class Links(models.Model):
         #pass
         list_display = ('link_title','link_url')
         #search_fields = ['link_tit']
+ 
+class Setting(models.Model):
+    '''blog setting options'''
+    setting_name = models.CharField(_('SettingName'), max_length=32)
+    setting_value = models.CharField(_('SettingValue'),max_length=255, null=True, blank=True)
+    setting_desc = models.CharField(_('Description'),null=True,blank=True,
+ 	                                 max_length=255)
+ 	
+    def __unicode__(self):
+ 		return self.setting_name
+ 	
+    class Meta:
+ 		verbose_name = _('Setting')
+ 		verbose_name_plural = _('Settings')
