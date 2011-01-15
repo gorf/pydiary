@@ -17,12 +17,12 @@ class PostAdmin(admin.ModelAdmin):
     list_filter =('post_type','category')
     fieldsets = (
     (None, {
-        'fields': ('title', 'post_name','category','markup',
-                   'content','post_status','menu_order','comment_status',)
+        'fields': ('title', 'post_name','category','post_type','markup',
+                   'content','post_status','tags','comment_status',)
     }),
     ('Advanced options', {
         'classes': ('collapse',),
-        'fields': ('post_parent', 'tags')
+        'fields': ('post_parent', 'menu_order')
     }),
     )
     class Media:
