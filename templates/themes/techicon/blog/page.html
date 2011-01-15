@@ -2,6 +2,7 @@
 {% theme_extends "base.html" %}
 {% block title %}{{post.title}} - {{ block.super }} {% endblock %}
 {% block meta %}<meta content="{{post.title}},Pylogs,基于Python的博客系统" name="keywords"/>
+{% block script %}<script language="javascript" type="text/javascript" src="{%media_url%}/js/jquery-1.2.3.pack.js" ></script>{%endblock%}
 <meta name="description" content="{{post.content|striptags|truncatewords_html:30}}"/>{%endblock%}
 <!--Start of content-->
 {% block content %}
