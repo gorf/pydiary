@@ -1,8 +1,11 @@
+#-*- coding:utf-8 -*-
 from os import path
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-DATABASE_ENGINE = 'mysql' 
+DATABASE_ENGINE = 'postgresql_psycopg2'
+#DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'pylogs'
 DATABASE_USER = 'root'
 DATABASE_PASSWORD = ''
@@ -68,3 +71,12 @@ INSTALLED_APPS = (
     'tests',
 )
 VERSION = (1, 15, 'beta')	
+ 
+ 
+#FEED CONF START
+FEED_BLOG_URL_PREFIX = "http://code.google.com/p/pydiary/"  #change to your site url
+FEED_POST_AUTHOR_NAME = "Gorf"
+FEED_COPYRIGHT =  "PyDiary by Gorf"
+FEED_GLOBAL_TITLE = "PyDiary: Latest Posts"
+FEED_GLOBAL_DESCRIPTION = "logging your life..."
+#FEED CONF END

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pylogs 1.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-07 17:28+0800\n"
-"PO-Revision-Date: 2011-01-07 17:59+0800\n"
+"POT-Creation-Date: 2011-01-15 10:39+0800\n"
+"PO-Revision-Date: 2011-01-15 09:49+0800\n"
 "Last-Translator: Gorf <liuqing.com@gmail.com>\n"
 "Language-Team: Sky <liuqing.com@gmail.com>\n"
 "Language: \n"
@@ -19,79 +19,91 @@ msgstr ""
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: blog/feeds.py:17
+#: blog/feeds.py:20
+msgid "PyDiary by Gorf"
+msgstr ""
+
+#: blog/feeds.py:21
 msgid "Emerge Day2day: Latest Posts"
 msgstr "日复一日emerge:最新文章"
 
-#: blog/feeds.py:18
+#: blog/feeds.py:22
 msgid "logging your life..."
-msgstr "logging your life..."
+msgstr "记录你的人生……"
 
-#: blog/models.py:13 blog/models.py:184 blog/models.py:198
+#: blog/models.py:12 blog/models.py:182 blog/models.py:196
 msgid "Post"
 msgstr "文章"
 
-#: blog/models.py:14
+#: blog/models.py:13
 msgid "Page"
 msgstr "页面"
 
-#: blog/models.py:18
+#: blog/models.py:17
 msgid "Published"
 msgstr "已发布"
 
-#: blog/models.py:19
+#: blog/models.py:18
 msgid "Draft"
 msgstr "草稿"
 
-#: blog/models.py:20
+#: blog/models.py:19
 msgid "Private"
 msgstr "私人"
 
-#: blog/models.py:24
+#: blog/models.py:23
 msgid "UnApproved"
 msgstr "未审核"
 
-#: blog/models.py:25
+#: blog/models.py:24
 msgid "Approved"
 msgstr "已审核"
 
-#: blog/models.py:26
+#: blog/models.py:25
 msgid "Spam"
 msgstr "垃圾"
 
-#: blog/models.py:30
+#: blog/models.py:29
 msgid "Allow Comments"
 msgstr "允许评论"
 
-#: blog/models.py:31
+#: blog/models.py:30
 msgid "Disallow Comments"
 msgstr "不允许评论"
 
-#: blog/models.py:32
+#: blog/models.py:31
 msgid "Allow Register Comments"
 msgstr "只允许注册用户评论"
 
-#: blog/models.py:37 blog/models.py:70 templates/filemanager/index.html:42
+#: blog/models.py:36
+msgid "HTML"
+msgstr ""
+
+#: blog/models.py:37
+msgid "MARKDOWN"
+msgstr ""
+
+#: blog/models.py:42 blog/models.py:74 templates/filemanager/index.html:42
 msgid "Name"
 msgstr "名称"
 
-#: blog/models.py:38
+#: blog/models.py:43
 msgid "Slug"
 msgstr "简称"
 
-#: blog/models.py:39 blog/models.py:73 blog/models.py:109
+#: blog/models.py:44 blog/models.py:77 blog/models.py:114
 msgid "Use as url"
 msgstr "作为链接使用"
 
-#: blog/models.py:40
+#: blog/models.py:45
 msgid "Reference count"
 msgstr "引用次数"
 
-#: blog/models.py:61
+#: blog/models.py:65
 msgid "Tag"
 msgstr "标签"
 
-#: blog/models.py:62 blog/models.py:126 templates/blog/tags/menu.html:4
+#: blog/models.py:66 blog/models.py:131 templates/blog/tags/menu.html:4
 #: templates/themes/beijing2008/blog/page.html:15
 #: templates/themes/beijing2008/blog/post.html:16
 #: templates/themes/beijing2008/blog/tags.html:3
@@ -110,54 +122,58 @@ msgstr "标签"
 msgid "Tags"
 msgstr "标签"
 
-#: blog/models.py:71 blog/models.py:245
+#: blog/models.py:75 blog/models.py:243
 msgid "Description"
 msgstr "描述"
 
-#: blog/models.py:72
+#: blog/models.py:76
 msgid "English name"
 msgstr "英文名"
 
-#: blog/models.py:95 blog/models.py:107
+#: blog/models.py:98 blog/models.py:112
 msgid "Category"
 msgstr "分类"
 
-#: blog/models.py:96 templates/themes/beijing2008/base.html:100
+#: blog/models.py:99 templates/themes/beijing2008/base.html:100
 #: templates/themes/beijing2008/blog/page.html:11
 #: templates/themes/beijing2008/blog/post.html:12
 #: templates/themes/default/base.html:57
 #: templates/themes/default/blog/post.html:19
-#: templates/themes/techicon/base.html:99
+#: templates/themes/techicon/base.html:120
 #: templates/themes/techicon/blog/post.html:13 templates/wap/page.html:5
 #: templates/wap/post.html:6
 msgid "Categories"
 msgstr "分类"
 
-#: blog/models.py:104 blog/models.py:244
+#: blog/models.py:107 blog/models.py:242
 msgid "Title"
 msgstr "标题"
 
-#: blog/models.py:105 blog/models.py:208 templates/blog/comment_form.html:28
+#: blog/models.py:109
+msgid "Markup"
+msgstr ""
+
+#: blog/models.py:110 blog/models.py:206 templates/blog/comment_form.html:28
 msgid "Content"
 msgstr "内容"
 
-#: blog/models.py:108
+#: blog/models.py:113
 msgid "Post name"
 msgstr "文章缩略名"
 
-#: blog/models.py:110
+#: blog/models.py:115
 msgid "Post type"
 msgstr "文章类别"
 
-#: blog/models.py:112
+#: blog/models.py:117
 msgid "Post status"
 msgstr "文章状态"
 
-#: blog/models.py:117
+#: blog/models.py:122
 msgid "Parent page"
 msgstr "上级页面"
 
-#: blog/models.py:118 blog/models.py:206 blog/models.py:251
+#: blog/models.py:123 blog/models.py:204 blog/models.py:249
 #: templates/themes/beijing2008/blog/list.html:12
 #: templates/themes/beijing2008/blog/page.html:20
 #: templates/themes/beijing2008/blog/post.html:21
@@ -171,63 +187,63 @@ msgstr "上级页面"
 msgid "Pubdate"
 msgstr "发表时间"
 
-#: blog/models.py:119
+#: blog/models.py:124
 msgid "Hits"
 msgstr "点击"
 
-#: blog/models.py:120
+#: blog/models.py:125
 msgid "Menu order"
 msgstr "菜单顺序"
 
-#: blog/models.py:121
+#: blog/models.py:126
 msgid "Comment status"
 msgstr "评论状态"
 
-#: blog/models.py:124
+#: blog/models.py:129
 msgid "Comment count"
 msgstr "评论数"
 
-#: blog/models.py:173
+#: blog/models.py:171
 msgid "Post categories"
 msgstr "文章类别"
 
-#: blog/models.py:185
+#: blog/models.py:183
 msgid "Posts"
 msgstr "文章"
 
-#: blog/models.py:200 templates/blog/comment_form.html:10
+#: blog/models.py:198 templates/blog/comment_form.html:10
 msgid "Author"
 msgstr "作者"
 
-#: blog/models.py:201 templates/blog/comment_form.html:16
+#: blog/models.py:199 templates/blog/comment_form.html:16
 msgid "Email"
 msgstr "Email"
 
-#: blog/models.py:202 blog/models.py:243 templates/blog/comment_form.html:22
+#: blog/models.py:200 blog/models.py:241 templates/blog/comment_form.html:22
 msgid "URL"
 msgstr "URL"
 
-#: blog/models.py:204
+#: blog/models.py:202
 msgid "IP"
 msgstr "IP"
 
-#: blog/models.py:209
+#: blog/models.py:207
 msgid "Approve status"
 msgstr "审核状态"
 
-#: blog/models.py:211
+#: blog/models.py:209
 msgid "User agent info"
 msgstr "用户浏览器信息"
 
-#: blog/models.py:213
+#: blog/models.py:211
 msgid "UserId"
 msgstr "用户ID"
 
-#: blog/models.py:232
+#: blog/models.py:230
 msgid "Comment"
 msgstr "评论"
 
-#: blog/models.py:233 templates/themes/beijing2008/blog/list.html:11
+#: blog/models.py:231 templates/themes/beijing2008/blog/list.html:11
 #: templates/themes/beijing2008/blog/page.html:12
 #: templates/themes/beijing2008/blog/page.html:31
 #: templates/themes/beijing2008/blog/post.html:13
@@ -244,25 +260,25 @@ msgstr "评论"
 msgid "Comments"
 msgstr "评论"
 
-#: blog/models.py:247
+#: blog/models.py:245
 msgid "Image"
 msgstr "图片"
 
-#: blog/models.py:249
+#: blog/models.py:247
 msgid "Order"
 msgstr "排序"
 
-#: blog/models.py:250
+#: blog/models.py:248
 msgid "Minimal at front"
 msgstr "值小的靠前"
 
-#: blog/models.py:262
+#: blog/models.py:260
 msgid "Link"
 msgstr "链接"
 
-#: blog/models.py:263 templates/themes/beijing2008/base.html:95
+#: blog/models.py:261 templates/themes/beijing2008/base.html:95
 #: templates/themes/default/base.html:84
-#: templates/themes/techicon/base.html:111
+#: templates/themes/techicon/base.html:132
 msgid "Links"
 msgstr "链接"
 
@@ -272,12 +288,12 @@ msgstr "链接"
 msgid "Home"
 msgstr "首页"
 
-#: blog/views.py:43 wap/views.py:45
+#: blog/views.py:46 wap/views.py:47
 msgid "The confirmation code you entered was incorrect!"
 msgstr "您输入的验证码不正确！"
 
-#: blog/views.py:57 blog/views.py:100 tests/tests.py:130 wap/views.py:59
-#: wap/views.py:103
+#: blog/views.py:60 blog/views.py:107 tests/tests.py:130 wap/views.py:61
+#: wap/views.py:108
 msgid "Comment post successful!"
 msgstr "评论发表成功，可能需要等待管理员审核！"
 
@@ -387,7 +403,7 @@ msgstr "最新文章"
 
 #: templates/themes/beijing2008/base.html:104
 #: templates/themes/default/base.html:71
-#: templates/themes/techicon/base.html:103
+#: templates/themes/techicon/base.html:124
 msgid "Archives"
 msgstr "存档"
 
@@ -438,7 +454,7 @@ msgstr "Pylogs 项目"
 msgid "Contact Me"
 msgstr "联系我"
 
-#: templates/themes/techicon/base.html:94
+#: templates/themes/techicon/base.html:95
 msgid "Subscribe to my blog using RSS"
 msgstr "通过RSS订阅本站更新"
 
@@ -570,6 +586,10 @@ msgstr "Todo任务"
 #: todo/models.py:52
 msgid "Todo Tasks"
 msgstr "Todo任务"
+
+#, fuzzy
+#~ msgid "PyDiary: Latest Posts"
+#~ msgstr "最新文章"
 
 #~ msgid "File type is not allowed!"
 #~ msgstr "不允许的文件类型！"
