@@ -1,5 +1,6 @@
 #coding=utf-8
 import re
+import random
 
 from django.utils.translation import ugettext as _
 from django.template import loader,Context,RequestContext
@@ -7,17 +8,24 @@ from django.utils.http import urlquote
 from django.http import HttpResponse,HttpResponseRedirect,Http404
 from django.shortcuts import get_object_or_404,get_list_or_404,render_to_response
 from django.core.paginator import Paginator, InvalidPage
+from django.core.urlresolvers import reverse
 
-from utils import html,codehighlight
+from utils import html
 from utils.email import new_comment_mail
 from blog.templatetags.themes import theme_template_url
 from blog import models,blog_forms
 from blog.models import Post,Comments,Tags,Category
+from utils.waptools import detect_mobile
 
 PAGE_SIZE = 10
 LIST_TEMPLATE = theme_template_url()+ '/blog/list.html'
 def index(request):
     '''site index view,show 10 latest post.'''
+    #detect mobile device
+    mobile = detect_mobile(request,mobile_redirect = reverse('wap_pre'))
+    if mobile:
+        return HttpResponseRedirect(mobile)
+
     pageid = int(request.GET.get('page', '1'))
     pagedPosts = Paginator(Post.objects.all().filter(post_type__iexact = 'post',
                                       post_status__iexact = models.POST_STATUS[0][0]),
@@ -42,10 +50,12 @@ def post(request,postname=None,postid=0):
         #post back comment
         if request.method == 'POST':
             form = blog_forms.CommentForm(request.POST)
-            if request.POST.get('comment_vcode','').lower() != request.session.get('vcode',''):
+            if request.POST.get('comment_vcode','').lower() != request.session.get('vcode'):
                 error = _('The confirmation code you entered was incorrect!')
             else:  
                 if form.is_valid():
+                    #set a random string to session, refresh post failed
+                    request.session['vcode'] = random.random();
                     comment = Comments(post = post,
                                comment_author=form.cleaned_data['comment_author'],
                                comment_author_email=form.cleaned_data['comment_author_email'],
@@ -89,10 +99,12 @@ def page(request,pagename):
         #post back comment
         if request.method == 'POST':
             form = blog_forms.CommentForm(request.POST)
-            if request.POST.get('comment_vcode','').lower() != request.session.get('vcode',''):
+            if request.POST.get('comment_vcode','').lower() != request.session.get('vcode'):
                 error = 'The confirmation code you entered was incorrect!'
             else:                
                 if form.is_valid():
+                    #set a random string to session, refresh post failed 
+                    request.session['vcode'] = random.random();
                     comment = Comments(post = page,
                                comment_author=form.cleaned_data['comment_author'],
                                comment_author_email=form.cleaned_data['comment_author_email'],

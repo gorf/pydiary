@@ -1,10 +1,10 @@
-{%extends "wap/base.html"%}{%load i18n %}{% block title %}{{post.title}} - {{ block.super }} {% endblock %}
+{%extends "wap/base.html"%}{%load i18n wapfilters%}{% block title %}{{post.title}} - {{ block.super }} {% endblock %}
 {% block content %}     
 <strong>{{post.title}}</strong><br/>
 {% trans "Pubdate" %}:{{post.pubdate|date:"Y-m-d H:i:s"}}
     <br/>{%trans "Categories" %}:
     {% for cat in post.category.all %}
-    <a href="{%url wap_pre%}{{cat.get_absolute_url}}" rel="category tag">{{cat.name}}</a>{% if not forloop.last %},{% endif %}
+    <a href="{%url wap_pre%}{{cat.get_absolute_url}}">{{cat.name}}</a>{% if not forloop.last %},{% endif %}
     {% endfor %}
     {{post.hits}} {% trans "Views" %}
     {% if post.tags.all %}
@@ -15,7 +15,7 @@
     {% endfor %}
     {% endif %}   
    <br/>    
-     {{post.content|striptags|linebreaksbr}}
+     {{post.content|safewml}}
     <br/>
       <small><a href="{%url wap_pre%}{{post.get_absolute_url}}">{% trans "Comments" %}({{post.comment_count}})</a><br/>
       </small>
@@ -24,9 +24,9 @@
         <strong>{% trans "Comments" %}</strong>       
         {% for cmt in post.get_comments%}
           <br/>
-            <strong>{% if cmt.comment_author_url %}<a href="{{cmt.comment_author_url}}" target="_blank">{{cmt.comment_author}}</a>{% else %}{{cmt.comment_author}}{% endif %}</strong>
+            <strong>{% if cmt.comment_author_url %}<a href="{{cmt.comment_author_url}}">{{cmt.comment_author}}</a>{% else %}{{cmt.comment_author}}{% endif %}</strong>
             <em>{% trans "Post at" %} {{cmt.comment_date|date:"Y-m-d H:i:s"}}</em>
-           <br/>{{cmt.comment_content|striptags|linebreaks }}
+           <br/>{{cmt.comment_content|safewml }}
         {% endfor %}   
  {% endifnotequal %}
 {% endblock %}
