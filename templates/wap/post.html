@@ -1,4 +1,4 @@
-{%extends "wap/base.html"%}{%load i18n waptags %}{% block title %}{{post.title}} - {{ block.super }} {% endblock %}
+{%extends "wap/base.html"%}{%load i18n waptags wapfilters%}{% block title %}{{post.title}} - {{ block.super }} {% endblock %}
 {% block content %}
 <strong>{{post.title}}</strong>
 <br/>
@@ -17,7 +17,7 @@
     {% endif %}
     </small>
     <br/>   
-{{post.content|safe}}
+{{post.content|safewml}}
     <br/>
       <small><a href="{%url wap_pre%}{{post.get_absolute_url}}">{% trans "Comments" %}({{post.comment_count}})</a><br/>
       </small>
@@ -31,6 +31,6 @@
           <br/>
             <strong>{% if cmt.comment_author_url %}<a href="{{cmt.comment_author_url}}" >{{cmt.comment_author}}</a>{% else %}{{cmt.comment_author}}{% endif %}</strong>
             <em>{% trans "Post at" %} {{cmt.comment_date|date:"Y-m-d H:i:s"}}</em>
-           <br/>{{cmt.comment_content|striptags|linebreaks }}
+           <br/>{{cmt.comment_content|safewml }}
         {% endfor %}
  {% endifnotequal %}{% endblock %}
