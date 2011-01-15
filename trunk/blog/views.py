@@ -23,6 +23,7 @@ def index(request):
     '''site index view,show 10 latest post.'''
     #detect mobile device
     mobile = detect_mobile(request,mobile_redirect = reverse('wap_pre'))
+    #TO-DO: fix firefox with wml addone  detect
     if mobile:
         return HttpResponseRedirect(mobile)
 
@@ -56,13 +57,18 @@ def post(request,postname=None,postid=0):
                 if form.is_valid():
                     #set a random string to session, refresh post failed
                     request.session['vcode'] = random.random();
+                    if  post.comment_status ==  models.POST_COMMENT_STATUS[3][0]:  # comment no need approve
+                        comment_approved_status = models.COMMENT_APPROVE_STATUS[1][0]   # comment approved
+                    else:
+                        comment_approved_status = models.COMMENT_APPROVE_STATUS[0][0]   # comment unapproved
+ 	
                     comment = Comments(post = post,
                                comment_author=form.cleaned_data['comment_author'],
                                comment_author_email=form.cleaned_data['comment_author_email'],
                                comment_author_url=form.cleaned_data['comment_author_url'],
                                comment_author_IP=request.META['REMOTE_ADDR'],
                                comment_content = form.cleaned_data['comment_content'],
-                               comment_approved=str(models.COMMENT_APPROVE_STATUS[0][0]),
+                               comment_approved = str(comment_approved_status),
                                comment_agent=request.META['HTTP_USER_AGENT'])                   
                     comment.save()
                     #send mail to admin
@@ -70,7 +76,7 @@ def post(request,postname=None,postid=0):
                     msg = _('Comment post successful!')
                     form = blog_forms.CommentForm()                  
         #if allow comment,show the comment form
-        elif post.comment_status == models.POST_COMMENT_STATUS[0][0]:
+        elif (post.comment_status == models.POST_COMMENT_STATUS[0][0]) or (post.comment_status == models.POST_COMMENT_STATUS[3][0]) :
             form = blog_forms.CommentForm()
         else:
             form = None
@@ -119,7 +125,7 @@ def page(request,pagename):
                     msg = _('Comment post successful!')
                     form = blog_forms.CommentForm() 
         #if allow comment,show the comment form
-        elif page.comment_status == models.POST_COMMENT_STATUS[0][0]:
+        elif (page.comment_status == models.POST_COMMENT_STATUS[0][0]) or (page.comment_status == models.POST_COMMENT_STATUS[3][0]) :
             form = blog_forms.CommentForm()
         else:
             form = None
