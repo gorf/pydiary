@@ -274,8 +274,8 @@ class Setting(models.Model):
  	                                 max_length=255)
  	
     def __unicode__(self):
- 		return self.setting_name
+        return self.setting_name
  	
     class Meta:
- 		verbose_name = _('Setting')
- 		verbose_name_plural = _('Settings')
+        verbose_name = _('Setting')
+        verbose_name_plural = _('Settings')
