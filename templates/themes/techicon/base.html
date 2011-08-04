@@ -6,9 +6,10 @@
 <title>{% block title %}{%site_name%}-{%site_subtitle%} {% endblock %}</title>
 {%block meta %}
 <meta content="linux,gentoo,blog,博客,todo,python,Django,基于Python的博客系统" name="keywords"/>
-<meta name="description" content="Pylogs是一个由Sky独立开发的个人站点，程序基于python+django.主要目的是实现一个简单的blog系统，当然不仅仅是blgo,以后将加入更多新的功能。总之，一切由简单开始！　　
-项目地址:http://code.google.com/p/pylogs
-Simple is beautiful..."/>{%endblock%}
+<meta name="description" content="PyDiary基于python+django.主要目的是实现一个简单的blog系统，当然不仅仅是blog,以后将加入更多新的功能。总之，一切由简单开始！　　项目fork自sky的pylogs。
+pylogs项目地址:http://code.google.com/p/pylogs
+现项目地址：http://code.google.com/p/pydiary
+"/>{%endblock%}
 <script type="text/javascript" src="{%media_url%}/js/highslide.packed.js"></script>
 <script type="text/javascript" src="{%media_url%}/js/shCore.js"></script>
 <script type="text/javascript" src="{%media_url%}/js/common.js"></script>
@@ -17,8 +18,8 @@ Simple is beautiful..."/>{%endblock%}
 <link rel="stylesheet" href="{% theme_media_url %}/css/style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="{%media_url%}/css/code.css" type="text/css" media="screen" >
 <link rel="stylesheet" href="{%media_url%}/css/highslide.css" type="text/css" media="screen">
-    <link rel="alternate" type="application/rss+xml" title="订阅 Pylogs Rss Feed" href='{% url feeds url="rss" %}'>
-    <link rel="alternate" type="application/rss+xml" title="订阅 Pylogs Atom Feed" href='{% url feeds url="atom" %}'>
+    <link rel="alternate" type="application/rss+xml" title="订阅 Rss Feed" href='{% url feeds url="rss" %}'>
+    <link rel="alternate" type="application/rss+xml" title="订阅 Atom Feed" href='{% url feeds url="atom" %}'>
 {% block script %}{% endblock %}
 </head>
 <body>
@@ -150,7 +151,7 @@ Simple is beautiful..."/>{%endblock%}
 
 <br clear="all">
 <div id="footer">
-Powered by <a href="http://code.google.com/p/pylogs/" style="color:#ff9900; font-weight:bold;" >Pylogs</a><sup>{% get_version %}</sup>
+Powered by <a href="http://code.google.com/p/pydiary/" style="color:#ff9900; font-weight:bold;" >PyDiary</a><sup>{% get_version %}</sup>
 </div></div>
 <script language="javascript">
 window.onload = function(){
