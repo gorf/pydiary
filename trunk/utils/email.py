@@ -8,7 +8,7 @@ FROM_EMAIL = 'admin@pylogs.cn'
 #append this message to mail content bottom
 MAIL_BOTTOM_MESSAGE = u'''<br/><br/><br/>
 This is a mail send by the pylogs system automaticaly, Please do not reply this mail.<br/>
-<a href="http://pylogs.cn" style="color:#f0f;font-weight:bold;">Pylogs</a> mail system.'''
+<a href="http://gentoogle.com" style="color:#f0f;font-weight:bold;">Pydiary</a> mail system.'''
 
 def new_comment_mail(post_title,comment_content):
     '''send a mail to admin when a new comment posted'''
@@ -18,8 +18,8 @@ def new_comment_mail(post_title,comment_content):
 
         firstuser = User.objects.get(id__exact = 1)
         if User is not None:
-            subject = u'Pylogs有新评论等待审核'
-            message = u'Pylogs中的文章<b>%s</b>有一条新评等待您的审核.内容为:<br/>%s' % (post_title,comment_content)
+            subject = u'Pydiary有新评论等待审核'
+            message = u'Pydiary中的文章<b>%s</b>有一条新评等待您的审核.内容为:<br/>%s' % (post_title,comment_content)
             recipient_list= [firstuser.email]    
             th = Thread(target=send_html_mail,args=(subject,message,recipient_list))
             th.start()
