@@ -1,0 +1,1 @@
+Pydiary is forked from pylogs. It is a personnel blog system based on Python & Django. It implement blog's base function. It support skin,tag feature. A todo project,which manage your tasks, is integrated in it.
