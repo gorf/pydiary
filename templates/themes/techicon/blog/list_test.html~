@@ -1,0 +1,30 @@
+{% load i18n themes posttags render%}
+{% theme_extends "base2.html" %}
+{% block title %}{{pagetitle}} - {{ block.super }} {% endblock %}
+{% block content %}
+{% for post in posts %}
+    <div class="post">
+      <h2>
+        <a href="{{post.get_absolute_url}}" >{{post.title}}</a>
+      </h2>
+    <small>{% trans "Pubdate" %}: <abbr title="post time">{{post.pubdate|date:"Y-m-d H:i:s"}}</abbr></small><br><br>
+
+      <div class="postbg">
+        <p>
+         {{post.content|markup:post.markup|safe|truncatewords_html:"20"}}
+        </p>
+      </div>
+    <br/>
+    <small><img title="Comments" height="16" src="{% media_url %}/images/comment.gif" width="16" align="absmiddle">
+      <a href="{{post.get_absolute_url}}#newcomments">{% trans "Comments" %}({{post.comment_count}})</a> | {{post.hits}} {% trans "Views" %}</small><br>
+   </div>      
+    {% endfor %}
+<!--Start of pagger-->
+<div class="navigation">
+        <div class="alignleft">{% if prev_page %}<a href="?page={{prev_page}}">&laquo;{% trans "Prev" %}</a>{% endif %}
+    {% if next_page%}<a href="?page={{next_page}}">{% trans "Next" %}&raquo;</a>{% endif %} </div>
+        <div class="alignright"></div>
+</div>
+<!--End of pagger-->
+{% endblock %}
+

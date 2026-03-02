@@ -1,0 +1,2 @@
+{% load render %}
+{{ obj.content|markup:obj.markup|safe|truncatewords_html:"100" }}

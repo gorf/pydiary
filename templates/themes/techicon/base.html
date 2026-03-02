@@ -1,0 +1,227 @@
+{% load i18n posttags menu links themes config %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="google-site-verification" content="LB5caBT5CQ_8WTQy7RTexECkSogUtdRrV0NdbVcYHXo" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{% block title %}{%site_name%}-{%site_subtitle%} {% endblock %}</title>
+{%block meta %}
+<meta name="keywords" content="linux,gentoo,python,诗词歌赋"/>
+<meta name="description" content="日复一日emerge是gorf的个人博客，里面有关于linux和python的相关文章，也有gorf的一些生活感悟。所有未注明的文章均为原创。"/>{%endblock%}
+<script type="text/javascript" src="{%media_url%}/js/highslide.packed.js"></script>
+<script type="text/javascript" src="{%media_url%}/js/shCore.js"></script>
+<script type="text/javascript" src="{%media_url%}/js/common.js"></script>
+<script type="text/javascript" src="{%media_url%}/js/shBrushes.js"></script>
+<link rel="stylesheet" href="{%media_url%}/css/SyntaxHighlighter.css" type="text/css" media="screen" >
+<link rel="stylesheet" href="{% theme_media_url %}/css/style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="{%media_url%}/css/code.css" type="text/css" media="screen" >
+<link rel="stylesheet" href="{%media_url%}/css/highslide.css" type="text/css" media="screen">
+    <link rel="alternate" type="application/rss+xml" title="订阅 Rss Feed" href='/feeds/rss/'>
+    <link rel="alternate" type="application/rss+xml" title="订阅 Atom Feed" href='/feeds/atom/'>
+{% block script %}{% endblock %}
+</head>
+<body>
+<div id="wrapper">
+<div id="absense">
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-1534115085913743";
+/* adsense */
+google_ad_slot = "9284831600";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+<div id="topbar">
+<div id="topbarright">
+    <div id="topsearch">
+    <!-- SiteSearch Google -->
+        <form method="get" style="margin:0; padding:0; margin-top:-3px;" action="http://www.google.com.hk/custom" target="google_window">
+        <input type="text" name="q" maxlength="255" value="Search..." id="sbi" onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" class="swap_value" ></input>
+        <table border="0" style="display:none;" >
+        <tr><td nowrap="nowrap" valign="top" align="left" >
+        </td>
+        <td nowrap="nowrap">
+        <input type="hidden" name="domains" value="gentoogle.com"></input>
+        </td></tr>
+        <tr>
+        <td>&nbsp;</td>
+        <td nowrap="nowrap">
+        <table >
+        <tr>
+        <td>
+        <input type="radio" name="sitesearch" value="" id="ss0"></input>
+        <label for="ss0" title="搜索网络"><font size="-1" color="black">Web</font></label></td>
+        <td>
+        <input type="radio" name="sitesearch" value="gentoogle.com" checked id="ss1"></input>
+        <label for="ss1" title="搜索 gentoogle.com"><font size="-1" color="black">gentoogle.com</font></label></td>
+        </tr>
+        </table>
+        <input type="hidden" name="client" value="pub-6437780444414942"></input>
+        <input type="hidden" name="forid" value="1"></input>
+        <input type="hidden" name="channel" value="1877657874"></input>
+        <input type="hidden" name="ie" value="UTF-8"></input>
+        <input type="hidden" name="oe" value="UTF-8"></input>
+        <input type="hidden" name="safe" value="active"></input>
+        <input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:50;LW:157;L:http://gentoogle.com/media/themes/default/images/logo.gif;S:http://gentoogle.com;FORID:1"></input>
+        <input type="hidden" name="hl" value="zh-CN"></input>
+        </td></tr></table>
+        </form>
+    <!-- SiteSearch Google -->
+    </div>
+</div>
+<div id="topbarleft">
+    <div id="navigation">
+        {% get_menus %}        
+    </div>
+</div>
+
+</div>
+
+<div id="header"><h1><a href='#'>{%site_name%}</a></h1><h2>{%site_subtitle%}</h2></div>
+{% block recent %}{% endblock %}
+<div id="main">
+    <div class="entry">
+        <!--Start of prompt-->
+        {% if msg %}
+        <div class="message">{{msg}}</div>
+        {% endif %}
+         {% if error %}
+        <div class="message error">{{error}}</div>
+        {% endif %}
+        <!--End of prompt--> 
+            {% block content %}
+            {% endblock %}		
+<div>
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-annotation="inline" data-width="300"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  window.___gcfg = {lang: 'zh-CN'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<!wumii>
+<script type="text/javascript">
+    var wumiiPermaLink = ""; //请用代码生成文章永久的链接
+    var wumiiTitle = ""; //请用代码生成文章标题
+    var wumiiTags = ""; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+    var wumiiSitePrefix = "http://gentoogle.com/";
+</script>
+<script type="text/javascript" id="wumiiRelatedItems" src="http://widget.wumii.com/ext/relatedItemsWidget.htm?type=1&amp;mode=3&amp;num=5"></script>
+<a href="http://www.wumii.com/widget/relatedItems.htm" style="border:0;">
+    <img src="http://static.wumii.com/images/pixel.png" alt="无觅相关文章插件" style="border:0;padding:0;margin:0;" />
+</a>
+</div>
+            	
+    </div>
+
+<!--start of sidebar-->
+<div id="sidebar">
+    {% block sidebar %}
+    <div id="subscribe">
+        <img src="{% theme_media_url %}/images/feed.png" style="padding-right: 10px;" alt="FEED" align="left">
+            <a href='/feeds/rss/' title='{% trans "Subscribe to my blog using RSS" %}'><b>{% trans "Subscribe to my blog using RSS" %}</b></a>
+    </div>
+
+    <!--div id="feedcount">
+    <p><a href="http://feeds.feedburner.com/gentoogle"><img src="http://feeds.feedburner.com/~fc/gentoogle?bg=CC9900&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" align="center" /></a></p>
+    </div-->
+
+  <div id="google share">
+  <script type="text/javascript"
+  src="https://www.google.com/reader/ui/publisher-en.js"></script>
+  <script type="text/javascript"
+  src="https://www.google.com/reader/public/javascript/user/00843763207335309825/state/com.google/broadcast?n=5&callback=GRC_p(%7Bc%3A%22khaki%22%2Ct%3A%22%5Cu6211%5Cu7684%5Cu9605%5Cu8BFB%5Cu5171%5Cu4EAB%22%2Cs%3A%22false%22%2Cn%3A%22true%22%2Cb%3A%22false%22%7D)%3Bnew%20GRC"></script>
+                      </div>
+                      <div>
+                      <embed type="application/x-shockwave-flash" src="https://picasaweb.google.com/s/c/bin/slideshow.swf" width="350" height="233" flashvars="host=picasaweb.google.com&caption=1&hl=en_US&feat=flashalbum&RGB=0xFFFFCC&feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fliuqing.com%3Falt%3Drss%26kind%3Dphoto%26access%3Dpublic%26psc%3DF%26q%26uname%3Dliuqing.com" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+                      </div>
+                      <div>
+                      <script
+                      src="http://www.douban.com/service/badge/gorf/?show=dolist&cat=book&select=random&n=9&columns=3"
+                      type="text/javascript"></script>
+                      </div>
+
+
+
+    <div id="sidebar1">
+        <ul>	
+            <li>
+            <h2>{% trans "Categories" %}</h2>
+            {% get_categories %}          
+            </li>      	
+            <li>
+            <h2>{% trans "Archives" %}</h2>
+               {% get_archivelist %}
+            </li>
+        </ul>
+    </div>
+    <div id="sidebar2">
+    <ul>
+	<li>
+        <h2>{% trans "Links" %}</h2>
+           {% get_links %}
+        </li>
+        <li>
+        <h2>Meta</h2>
+            <ul>                      
+            <li><a href="http://www.python.org" target="_blank"><img src="{% theme_media_url %}/images/python-powered.png" border="0" title="main program language is Python" alt="python"/></a></li>
+            <li><a href="http://www.djangoproject.com" target="_blank"><img src="{% theme_media_url %}/images/djangoproject.gif" border="0" title="django web framework" alt="django"/></a></li>
+            <li><a href="http://jquery.com" target="_blank"><img src="{% theme_media_url %}/images/jquery_logo.gif" title="javascript framework used jQuery" border="0" alt="jquery"/></a></li>
+            <li><a href="/admin/">{%if user.is_authenticated%}Admin{%else%}Login{%endif%}</a></li>
+                        </ul>
+        </li>
+    </ul>
+    </div>
+<div id="sidebar3"></div>
+    {% endblock %}
+</div>
+<!--end of sidebar-->
+</div>
+
+<br clear="all">
+<div id="footer">
+Powered by <a href="http://code.google.com/p/pydiary/" style="color:#ff9900; font-weight:bold;" >PyDiary</a><sup>{% get_version %}</sup>
+</div></div>
+<script language="javascript">
+window.onload = function(){
+dp.SyntaxHighlighter.BloggerMode();
+dp.SyntaxHighlighter.ClipboardSwf = '/media/js/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+}
+</script>
+
+<!google-analytics.com>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-308604-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+<!-- Start Visual Website Optimizer Asynchronous Code -->
+<script type='text/javascript'>
+var _vwo_code=(function(){
+var account_id=44784,
+settings_tolerance=2000,
+library_tolerance=2500,
+use_existing_jquery=false,
+// DO NOT EDIT BELOW THIS LINE
+f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+</script>
+<!-- End Visual Website Optimizer Asynchronous Code -->
+</body></html>
