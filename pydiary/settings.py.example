@@ -1,0 +1,76 @@
+#-*- coding:utf-8 -*-
+from os import path
+
+DEBUG = False
+ALLOWED_HOSTS = ['your-domain.com', 'www.your-domain.com', 'your-server-ip']
+TEMPLATE_DEBUG = DEBUG
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'your_db_name',
+        'USER': 'your_db_user',
+        'PASSWORD': 'your_db_password',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
+TIME_ZONE = 'Asia/Chongqing'
+LANGUAGE_CODE = 'zh-cn'
+SITE_ID = 1
+USE_I18N = True
+FORCE_SCRIPT_NAME = ''
+
+MEDIA_ROOT = path.join(path.dirname(__file__),'../media')
+ALLOW_FILE_TYPES = ('.jpg','.gif','.png')
+MEDIA_URL = '/media/'
+THEME_NAME = 'techicon'
+STATIC_PATH = './media'
+ADMIN_MEDIA_PREFIX = '/admin_media/'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'your-email@gmail.com'
+EMAIL_HOST_PASSWORD = 'your-email-password'
+EMAIL_USE_TLS = True
+
+SECRET_KEY = 'your-secret-key-here'
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.doc.XViewMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+)
+INTERNAL_IPS = ('127.0.0.1',)
+
+ROOT_URLCONF = 'pydiary.urls'
+TEMPLATE_DIRS = (path.join(path.dirname(__file__),'../templates'),)
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'django.contrib.staticfiles',
+    'blog',
+    'todo',
+    'filemanager',
+    'wap',
+)
+VERSION = (1, 15, 'beta')
+STATIC_URL = '/static/'
+
+FEED_BLOG_URL_PREFIX = "http://your-domain.com/"
+FEED_POST_AUTHOR_NAME = "Your Name"
+FEED_COPYRIGHT = "Your Blog Title"
+FEED_GLOBAL_TITLE = "Your Blog: 最新文章"
+FEED_GLOBAL_DESCRIPTION = "记录你的生活……"

@@ -1,0 +1,7 @@
+.svn/
+.sync/
+*.pyc
+*~
+*.py~
+*.swp
+pydiary/settings.py
