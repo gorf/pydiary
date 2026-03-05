@@ -35,13 +35,13 @@ urlpatterns = patterns('',
 
 # url for static
 if settings.DEBUG:
-    from django.conf.urls.static import static
     urlpatterns += patterns('',
                             (r'^media/(?P<path>.*)$', 'django.views.static.serve',
                 {'document_root': settings.STATIC_PATH}),
                             )
-    # 服务 admin 后台的静态文件（CSS、JS、图标）
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# 始终由 Django 提供 /static/（lighttpd rewrite 有问题时使用）
+from django.conf.urls.static import static
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 #urls for wap
 urlpatterns += patterns('',                        
                         (r'^wap/*',include('wap.urls')),
