@@ -35,10 +35,13 @@ urlpatterns = patterns('',
 
 # url for static
 if settings.DEBUG:
+    from django.conf.urls.static import static
     urlpatterns += patterns('',
                             (r'^media/(?P<path>.*)$', 'django.views.static.serve',
-                {'document_root': settings.STATIC_PATH}),                    
+                {'document_root': settings.STATIC_PATH}),
                             )
+    # 服务 admin 后台的静态文件（CSS、JS、图标）
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 #urls for wap
 urlpatterns += patterns('',                        
                         (r'^wap/*',include('wap.urls')),

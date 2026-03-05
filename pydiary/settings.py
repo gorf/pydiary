@@ -41,7 +41,11 @@ THEME_NAME = 'techicon'
 #STATIC_PATH = '/var/www/localhost/htdocs/pylogs/media'
 STATIC_PATH = './media'
 
-ADMIN_MEDIA_PREFIX = '/admin_media/'
+# Django 1.4+ 已弃用，admin 静态文件改用 STATIC_URL
+# ADMIN_MEDIA_PREFIX = '/admin_media/'
+
+# 静态文件收集目录（执行 collectstatic 后，admin 的 CSS/JS/图标会放这里）
+STATIC_ROOT = path.join(path.dirname(__file__), '../static')
 
 #Send Email settings
 EMAIL_HOST = 'smtp.gmail.com'
